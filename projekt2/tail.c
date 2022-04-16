@@ -42,6 +42,12 @@ void f_tail(const int SIZE, FILE *file)
     // Využívá se při překročení maximální délky řádku pro přeskočení znaků na další řádek
     int tmp;
 
+    // Inicializace kruhového zásobníku
+    for (int i = 0; i < SIZE; i++)
+    {
+        circ_arr[i] = NULL;
+    }
+
     // Čtení dat ze vstupu
     while (fgets(line, MAX_LEN + 3, file) != NULL)
     {
@@ -117,6 +123,7 @@ void f_tail(const int SIZE, FILE *file)
     // Tisk řádků ze zásobníku; začíná se na indexu 'front', končí se na indexu 'rear'
     for (int i = front; (i % SIZE) != rear + 1; ++i)
     {
+        if (circ_arr[i % SIZE] == NULL) continue; // TODO
         printf("%s", circ_arr[i % SIZE]);
         if ((i % SIZE) == rear) break;
     }

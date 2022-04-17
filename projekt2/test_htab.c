@@ -31,11 +31,23 @@ void print_pair(htab_pair_t *p){
 int main(void)
 {
     htab_t *p = htab_init(5);
+
     htab_insert_item(p, "klic");
+    htab_insert_item(p, "klicek");
     htab_insert_item(p, "klic2");
+
     print_table(p);
+
     //htab_erase(p, "klic");
-    print_table(p);
+    //print_table(p);
+
+    //print_pair(htab_find(p, "klicek"));
+
+    htab_for_each(p, &print_pair);
+
     htab_clear(p);
     print_table(p);
+
+    htab_free(p);
+    //print_table(p);
 }

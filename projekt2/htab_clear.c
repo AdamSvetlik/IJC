@@ -5,14 +5,15 @@ void htab_clear(htab_t * t)
 {
     for (size_t i = 0; i < t->arr_size; i++)
     {
-        while (t->arr_ptr[i] != NULL)
+        htab_item_t *item = t->arr_ptr[i];
+        while (item != NULL)
         {
-            htab_item_t *item = t->arr_ptr[i]->next;
-            if (!(htab_erase(t, t->arr_ptr[i]->pair.key)))
-                fprintf(stderr, "Chyba pri mazani\n");
-            t->arr_ptr[i] = item;
+            htab_erase(t, item->pair.key);
+                //fprintf(stderr, "Chyba pri mazani\n");
+            //t->arr_ptr[i] = item;
+            item = item->next;
         }
-        //t->arr_ptr[i] = NULL;
+        t->arr_ptr[i] = NULL;
     }
     t->size = 0;
 }

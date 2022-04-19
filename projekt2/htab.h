@@ -5,6 +5,10 @@
 #ifndef __HTAB_H__
 #define __HTAB_H__
 
+#define MAX_WORD_LEN 127
+#define AVG_LEN_MIN 6
+#define AVG_LEN_MAX 10
+
 #include <string.h>     // size_t
 #include <stdbool.h>    // bool
 #include <stdint.h>     // uintX_t -> hash_function 
@@ -39,7 +43,7 @@ size_t htab_bucket_count(const htab_t * t);     // velikost pole
 void htab_resize(htab_t *t, size_t newn);       // změna velikosti pole
                                                 // (umožňuje rezervaci místa)
 htab_item_t *htab_item_init(htab_key_t key);
-void htab_insert_item(htab_t * t, htab_key_t key);
+bool htab_insert_item(htab_t * t, htab_key_t key);
 
 htab_pair_t * htab_find(htab_t * t, htab_key_t key);  // hledání
 htab_pair_t * htab_lookup_add(htab_t * t, htab_key_t key);

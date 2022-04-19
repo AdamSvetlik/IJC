@@ -30,13 +30,20 @@ void print_pair(htab_pair_t *p){
 
 int main(void)
 {
-    htab_t *p = htab_init(5);
+    htab_t *p = htab_init(10);
 
     htab_insert_item(p, "klic");
     htab_insert_item(p, "klicek");
     htab_insert_item(p, "klic2");
 
     print_table(p);
+
+    htab_find(p, "klic")->value = 5;
+    htab_find(p, "klicek")->value = 15;
+    htab_find(p, "klic2")->value = -3;
+
+    print_table(p);
+
 
     //htab_erase(p, "klic");
     //print_table(p);
@@ -45,9 +52,18 @@ int main(void)
 
     htab_for_each(p, &print_pair);
 
-    htab_clear(p);
-    print_table(p);
+    //print_pair(htab_lookup_add(p, "klic"));
+    //print_table(p);
+
+    //print_pair(htab_lookup_add(p, "klic3"));
+    //print_table(p);
+    //htab_clear(p);
+    //htab_resize(p, 5);
+    //htab_erase(p, "klicek");
+    //print_table(p);
+
 
     htab_free(p);
     //print_table(p);
+
 }

@@ -13,7 +13,7 @@ bool htab_erase(htab_t * t, htab_key_t key)
     }
     if (item == NULL)
     {
-        fprintf(stderr, "Klic nenalezen.\n");
+        fprintf(stderr, "Chyba pri mazani\n");
         return false;
     }
 
@@ -25,7 +25,12 @@ bool htab_erase(htab_t * t, htab_key_t key)
     {
         pervious->next = item->next;
     }
+    free((char *)item->pair.key);
     free(item);
     t->size--;
+    if (t->size / t->arr_size < AVG_LEN_MIN)
+    {
+        htab_resize(t, t->arr_size / 2);
+    }
     return true;
 }

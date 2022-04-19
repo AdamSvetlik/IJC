@@ -21,6 +21,8 @@ void htab_resize(htab_t *t, size_t newn)
                 //strcpy(tmp, key);
                 //strcpy((char *)backup[backup_index].key, item->pair.key);
                 //backup[backup_index++].value = item->pair.value;
+
+                //printf("RESIZE: pred strcpy\n");
                 backup[backup_index].key = malloc(strlen(item->pair.key) + 1);
                 strcpy((char *)backup[backup_index].key, item->pair.key);
                 backup[backup_index++].value = item->pair.value;
@@ -28,7 +30,22 @@ void htab_resize(htab_t *t, size_t newn)
             }
             
         }
-        htab_clear(t);
+        //htab_clear(t);
+        htab_item_t *item2;
+        htab_item_t *toFree;
+        for(size_t i = 0; i < t->arr_size; i++)
+        {
+            item2 = t->arr_ptr[i];
+            while(item2 != NULL)
+            {
+                toFree = item2;
+                item2 = item2->next;
+                free((char *)toFree->pair.key);
+                free(toFree);
+            }
+            t->arr_ptr[i] = NULL;
+        }
+
         t->arr_ptr = realloc(t->arr_ptr, newn * sizeof(htab_item_t*));
         t->arr_size = newn;
         t->size = 0;
@@ -40,6 +57,7 @@ void htab_resize(htab_t *t, size_t newn)
         {
             htab_insert_item(t, backup[i].key);
             htab_find(t, backup[i].key)->value = backup[i].value;
+            free((char *)backup[i].key);
         }
     }
 }

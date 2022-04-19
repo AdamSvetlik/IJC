@@ -18,4 +18,6 @@ struct htab    // neúplná deklarace struktury - uživatel nevidí obsah
     htab_item_t **arr_ptr;
 };
 
+void print_table(htab_t *t);
+
 #endif // __HTAB_STRUCTS_H__

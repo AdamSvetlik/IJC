@@ -6,7 +6,7 @@
 #define __HTAB_H__
 
 #define MAX_WORD_LEN 127
-#define AVG_LEN_MIN 6
+#define AVG_LEN_MIN 2
 #define AVG_LEN_MAX 10
 
 #include <string.h>     // size_t

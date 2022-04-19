@@ -50,6 +50,21 @@ int main()
     //printf("size: %d\n", pole->size);
     //printf("arr_size: %d\n", pole->arr_size);
     print_table(pole);
+
+    htab_erase(pole, "znaku");
+
+    print_table(pole);
+    //printf("tadyy\n");
+    //printf("avg len: %d\n", pole->size / pole->arr_size);
+    //if (pole->size / pole->arr_size < AVG_LEN_MIN)
+    //{
+        //htab_resize(pole, pole->arr_size / 2);
+    //}
+    //print_table(pole);
+    //printf("avg len: %d\n", pole->size / pole->arr_size);
+    //htab_resize(pole, pole->arr_size / 2);
+    //print_table(pole);
+    //printf("avg len: %d\n", pole->size / pole->arr_size);
     //htab_resize(pole, pole->arr_size * 2);
     //print_table(pole);
     htab_free(pole);
